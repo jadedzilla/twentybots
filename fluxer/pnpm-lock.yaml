@@ -1,0 +1,99 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@fluxerjs/core':
+        specifier: ^1.2.4
+        version: 1.2.4
+      dotenv:
+        specifier: ^17.4.0
+        version: 17.4.0
+
+packages:
+
+  '@fluxerjs/builders@1.2.4':
+    resolution: {integrity: sha512-jWOL8QsmNGgFKlyi9pGfREZv6oQm8T+wcdF1U+0RyW75SXf8meRBfqtGA6EUd8pwoP9qQeU4O7IIwbALUxVZYQ==}
+
+  '@fluxerjs/collection@1.2.4':
+    resolution: {integrity: sha512-YXj+1yPBFdHRxSRIzWCYHqdynOOmjynmsLZGa1333chyYIn/hqEFjfQQi9nvNHN8EDJBjjH4OW+pF47K9XFALw==}
+
+  '@fluxerjs/core@1.2.4':
+    resolution: {integrity: sha512-LIKLaDxhSgyKxF4i8949+d5HgAh9YxtN+C3NCariTXE/1kIuvl8kCoLwdEINtIOzvOCz7OlO0pYXDm63Re36cw==}
+    engines: {node: '>=18.0.0'}
+
+  '@fluxerjs/rest@1.2.4':
+    resolution: {integrity: sha512-9K9aFL0bbL8dgWUCYaiIQJBZyTtFD00iMl61V6fDlvCTFyidXh2NjvUQD7rdOSZTtb8xvWbvLXX+xtBUD9fbuA==}
+
+  '@fluxerjs/types@1.2.4':
+    resolution: {integrity: sha512-cGtN3WvcJn78kP3X5TFfVnbNYaRSNu05HFdSgUsYNrdNzulVxRuvUlCSlFD/xpZBaljQUBg04K6fCWqpWcGYEQ==}
+
+  '@fluxerjs/util@1.2.4':
+    resolution: {integrity: sha512-RSlMv77Zklr+kIP+ZZLdhP6ogTAuf9USUxdFP+6GafGQp+7wG7gStlMWrQ7JMVeUQwGd6AZlf5jr+v154RCH3Q==}
+
+  '@fluxerjs/ws@1.2.4':
+    resolution: {integrity: sha512-DBJjka7d2yuE+aaEoroOB3dSPCMNrOtWM5U1IAkgP8jLQCFkFuf98H+2geuYrPGto2++c6uW/1GKHI4U5bxJeQ==}
+
+  dotenv@17.4.0:
+    resolution: {integrity: sha512-kCKF62fwtzwYm0IGBNjRUjtJgMfGapII+FslMHIjMR5KTnwEmBmWLDRSnc3XSNP8bNy34tekgQyDT0hr7pERRQ==}
+    engines: {node: '>=12'}
+
+  ws@8.20.0:
+    resolution: {integrity: sha512-sAt8BhgNbzCtgGbt2OxmpuryO63ZoDk/sqaB/znQm94T4fCEsy/yV+7CdC1kJhOU9lboAEU7R3kquuycDoibVA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
+snapshots:
+
+  '@fluxerjs/builders@1.2.4':
+    dependencies:
+      '@fluxerjs/types': 1.2.4
+      '@fluxerjs/util': 1.2.4
+
+  '@fluxerjs/collection@1.2.4': {}
+
+  '@fluxerjs/core@1.2.4':
+    dependencies:
+      '@fluxerjs/builders': 1.2.4
+      '@fluxerjs/collection': 1.2.4
+      '@fluxerjs/rest': 1.2.4
+      '@fluxerjs/types': 1.2.4
+      '@fluxerjs/util': 1.2.4
+      '@fluxerjs/ws': 1.2.4
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@fluxerjs/rest@1.2.4':
+    dependencies:
+      '@fluxerjs/types': 1.2.4
+
+  '@fluxerjs/types@1.2.4': {}
+
+  '@fluxerjs/util@1.2.4':
+    dependencies:
+      '@fluxerjs/types': 1.2.4
+
+  '@fluxerjs/ws@1.2.4':
+    dependencies:
+      '@fluxerjs/types': 1.2.4
+      ws: 8.20.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  dotenv@17.4.0: {}
+
+  ws@8.20.0: {}

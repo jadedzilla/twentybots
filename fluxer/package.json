@@ -1,0 +1,13 @@
+{
+  "name": "twentybots",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "jadedzilla",
+  "dependencies": {
+    "@fluxerjs/core": "^1.2.4",
+    "dotenv": "^17.4.0"
+  }
+}
