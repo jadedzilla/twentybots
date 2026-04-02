@@ -3,6 +3,4 @@ services:
     build: .
     container_name: twentybots
     env_file: .env
-    volumes:
-      - ./data.json:/app/data.json
     restart: unless-stopped
