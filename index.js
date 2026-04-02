@@ -4,6 +4,7 @@ const path = require('path');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const DATA_FILE = path.join(__dirname, 'data.json');
+const WATCH_CHANNEL_ID = process.env.CHANNEL_ID;
 
 const client = new Client({
   intents: [
@@ -13,14 +14,12 @@ const client = new Client({
   ]
 });
 
-// Default state
 let state = {
   currentChain: 0,
   highScore: 0,
   usersInChain: []
 };
 
-// Load saved data
 function loadData() {
   if (fs.existsSync(DATA_FILE)) {
     const raw = fs.readFileSync(DATA_FILE);
@@ -28,7 +27,6 @@ function loadData() {
   }
 }
 
-// Save data
 function saveData() {
   fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2));
 }
@@ -41,6 +39,9 @@ client.once('ready', () => {
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
 
+  // ✅ Only watch the specified channel
+  if (message.channel.id !== WATCH_CHANNEL_ID) return;
+
   const content = message.content.trim().toLowerCase();
   const usersSet = new Set(state.usersInChain);
 
@@ -50,7 +51,7 @@ client.on('messageCreate', (message) => {
       state.currentChain++;
       state.usersInChain = Array.from(usersSet);
 
-      saveData(); // persist progress
+      saveData();
     }
   } else {
     if (state.currentChain > 0) {
@@ -62,11 +63,10 @@ client.on('messageCreate', (message) => {
         `🔥 Yo chain ended at **${state.currentChain}**!\n🏆 High score: **${state.highScore}**`
       );
 
-      // Reset state
       state.currentChain = 0;
       state.usersInChain = [];
 
-      saveData(); // persist reset + high score
+      saveData();
     }
   }
 });
