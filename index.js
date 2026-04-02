@@ -1,23 +1,23 @@
-require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
-const { Client, GatewayIntentBits } = require('discord.js');
+require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
+const { Client, GatewayIntentBits } = require("discord.js");
 
-const DATA_FILE = path.join(__dirname, 'data.json');
+const DATA_FILE = path.join(__dirname, "data.json");
 const WATCH_CHANNEL_ID = process.env.CHANNEL_ID;
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
-  ]
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 let state = {
   currentChain: 0,
   highScore: 0,
-  usersInChain: []
+  usersInChain: [],
 };
 
 function loadData() {
@@ -31,12 +31,12 @@ function saveData() {
   fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2));
 }
 
-client.once('ready', () => {
+client.once('clientReady', (client) => {
   loadData();
   console.log(`Logged in as ${client.user.tag}`);
 });
 
-client.on('messageCreate', (message) => {
+client.on("messageCreate", (message) => {
   if (message.author.bot) return;
 
   // ✅ Only watch the specified channel
@@ -51,16 +51,21 @@ client.on('messageCreate', (message) => {
       state.currentChain++;
       state.usersInChain = Array.from(usersSet);
 
+      // ✅ Log to console
+      console.log(
+        `[YO DETECTED] ${message.author.tag} (${message.author.id}) | Chain: ${state.currentChain}`,
+      );
+
       saveData();
     }
   } else {
-    if (state.currentChain > 0) {
+    if (state.currentChain >= 2) {
       if (state.currentChain > state.highScore) {
         state.highScore = state.currentChain;
       }
 
       message.channel.send(
-        `🔥 Yo chain ended at **${state.currentChain}**!\n🏆 High score: **${state.highScore}**`
+        `🔥 Yo call ended at **${state.currentChain}**!\n🏆 High score: **${state.highScore}**`,
       );
 
       state.currentChain = 0;
